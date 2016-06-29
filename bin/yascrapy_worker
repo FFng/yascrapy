@@ -34,23 +34,28 @@ log_levels = {
 
 def input_params():
     parser = OptionParser()
-    parser.add_option("-c", "--count", dest="count",
-                      type="int", help="specify worker count", default=1)
+    parser.add_option(
+        "-c", "--count", dest="count", type="int", help="specify worker count", default=1)
     parser.add_option(
         "-n", "--name", dest="name", type="string", help="specify worker name")
     parser.add_option(
         "-l", "--level", dest="log_level", type="string", help="set log level")
-    parser.add_option("-t", "--test", action="store_true", dest="test", default=False,
-                      help="just test your html parser, if this is set, -c or --count will be ignore")
-    parser.add_option("-p", "--profile", action="store_true", dest="profile", default=False,
-                      help="profile your worker, if this is set, --count and --thread_count will be ignored")
-    parser.add_option("--profile_log", dest="profile_log",
-                      default="profile.txt", help="specify profile log file to output")
-    parser.add_option("-r", "--threads_count", dest="threads_count",
-                      default=10, type="int", help="specify threads number")
-    parser.add_option("-f", "--conf", dest="config_file",
-                      default="/etc/yascrapy/common.json", type="str", help="specify yascrapy conf file")
+    parser.add_option(
+        "-t", "--test", action="store_true", dest="test", default=False,
+            help="just test your html parser, if this is set, -c or --count will be ignore")
+    parser.add_option(
+        "-p", "--profile", action="store_true", dest="profile", default=False,
+            help="profile your worker, if this is set, --count and --thread_count will be ignored")
+    parser.add_option(
+        "--profile_log", dest="profile_log", default="profile.txt", help="specify profile log file to output")
+    parser.add_option(
+        "-r", "--threads_count", dest="threads_count",
+            default=10, type="int", help="specify threads number")
+    parser.add_option(
+        "-f", "--conf", dest="config_file", default="/etc/yascrapy/common.json", type="str",
+            help="specify yascrapy conf file")
     (options, args) = parser.parse_args()
+
     return (options, args)
 
 
@@ -96,16 +101,19 @@ def main():
         p = pstats.Stats(options.profile_log)
         p.sort_stats("cumtime").print_stats(".1")
         return
+
     if options.test:
         options.count = 1
         options.threads_count = 1
     process_list = []
+
     for i in range(options.count):
         process = multiprocessing.Process(
             target=run_process, args=(module, options, )
         )
         process_list.append(process)
         process.start()
+
     for p in process_list:
         p.join()
 

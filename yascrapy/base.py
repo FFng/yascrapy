@@ -21,7 +21,8 @@ import importlib
 
 
 class BaseProducer(object):
-    """Producer put initial links to http request queue on rabbitmq server.
+    """
+    Producer put initial links to http request queue on `RabbitMQ` server.
 
     Example usage::
 

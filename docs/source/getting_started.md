@@ -19,7 +19,7 @@ If rabbitmq queue have too many messages, the whole system is not stable and hav
 
 To avoid crawling links repeatedly, crawler need store the crawled links. Yascrapy use bloomd to do this job and  check whether crawler have crawled the gived link.
 
-Yascrapy config file use json format, including common.json, core.json, proxy.json, sample config files are in `yascrapy/conf` directory. Indeed, config file is matched to each component. `core.json` is used by the downloader component, `proxy.json` is used by the proxy component and `common.json` is used by worker component, producer component, ect.
+Yascrapy config file use json format, including common.json, core.json, proxy.json, sample config files are in `yascrapy/conf` directory. Indeed, config file is matched to each component. `core.json` is used by the downloader component, `proxy.json` is used by the proxy component and `common.json` is used by worker component, producer component, etc.
 
 Yascrapy have some admin tools to operate on yascrapy components, in `yascrapy/tools` directory.
 
