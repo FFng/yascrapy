@@ -1,8 +1,19 @@
 Installation
 ===
 
-RabbitMQ
----
+# 1. Quick start
+Yascrapy come with a Dockerfile that builds the environment of RabbitMQ, Redis, SSDB, MongoDB, and bloomd.
+
+```sh
+$ cd docker
+$ docker build -t yascrapy .
+$ docker run yascrapy
+$ docker inspect CONTAINER_NAME | grep IPAddress  # get ip address of docker container
+# edit the config file and try Yascrapy
+```
+
+# 2. Install on a local host
+## 2.1 RabbitMQ
 Check out the official site of RabbitMQ [here](https://www.rabbitmq.com/download.html).
 
 You may need [HAProxy](http://www.haproxy.org/) for better performance.
@@ -47,57 +58,45 @@ listen private_monitor
     stats refresh 5s
 ```
 
-Database
----
+## 2.2 Database
 Yascrapy use [Redis](http://redis.io/), [SSDB](http://ssdb.io/) and [MongoDB](https://www.mongodb.com/) as the backend database.
 
-The three are pretty easy to deploy, default configs are enough. Check [here](http://redis.io/download) for downloading Redis, [here](https://github.com/ideawu/ssdb) for installing SSDB and [here](https://www.mongodb.com/download-center#community) for MongoDB.
+The three are pretty easy to deploy, default configs are enough. 
+* Check <http://redis.io/download> for downloading Redis
+* <https://github.com/ideawu/ssdb> for installing SSDB
+* <https://www.mongodb.com/download-center#community> for MongoDB.
 
-bloomd
----
+## 2.3 bloomd
 Download and build from source.
 
 ```sh
 $ git clone https://armon@github.com/armon/bloomd.git
 $ cd bloomd
-$ pip install SCons  # Uses the Scons build system, may not be necessary
+$ sudo apt-get install scons  # Uses the Scons build system, may not be necessary
 $ scons
 $ ./bloomd
 ```
 
-Yascrapy
----
+## 2.4 Yascrapy
 Download and install from source.
 
-[comment]: <TODO> (change coding.net url to github url)
 
 ```sh
-$ git clone https://git.coding.net/cphilo/yascrapy.git
+$ git clone https://github.com/jianxunio/yascrapy.git 
 $ python setup.py install
 ```
 
 Now modify the config files(`core.json`, `proxy.json` and `common.json`) under the folder `conf` and fill up with the information of your own deployment.
 
-`yascrapy_worker` is the script to start up `worker` component, `yascrapy_producer` is the producer to start up `producer` component, and `yascrapy_cache` is for handling cache.
+* `yascrapy_worker` is the script to start up `worker` component,
+* `yascrapy_producer` is the producer to start up `producer` component, 
+* `yascrapy_cache` is for handling cache.
 
-Downloader component
----
+## 2.5 Downloader component
 Download and install from source.
 
-[comment]: <TODO> (change coding.net url to github url)
 
 ```sh
-$ go get git.coding.net/cphilo/downloader.git
+$ go get github.com/jianxun/downloader.git
 ```
 
-Quick start
----
-Yascrapy come with a Dockerfile that builds the environment of RabbitMQ, Redis, SSDB, MongoDB, and bloomd.
-
-```sh
-$ cd docker
-$ docker build -t yascrapy .
-$ docker run yascrapy
-$ docker inspect CONTAINER_NAME | grep IPAddress  # get ip address of docker container
-# edit the config file and try Yascrapy
-```
